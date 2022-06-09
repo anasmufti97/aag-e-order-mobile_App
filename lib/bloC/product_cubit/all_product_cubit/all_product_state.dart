@@ -12,7 +12,7 @@ class AllProductInitial extends AllProductState {}
 class LoadingState extends AllProductState {}
 
 class AllProductsFetchedSuccessfully extends AllProductState {
-  final List<Product>? client;
+  final AllProductApiResponse client;
 
   const AllProductsFetchedSuccessfully(this.client);
 }

@@ -10,13 +10,15 @@ class AllPolicyCubit extends Cubit<AllPolicyState> {
 
   final Repository _repository = Repository();
 
-  Future allPolicy() async {
+  Future allPolicy({required String customerAccount}) async {
     emit(LoadingState());
-    final AllPolicyApiResponse apiResponse = await _repository.allPolicy();
+    var _formData = {" CustAccount":customerAccount, "WinUser": "punjab\\dax", "WinPassword": "dax1"};
+    print(_formData);
+    final AllPolicyApiResponse apiResponse = await _repository.allPolicy(_formData);
     if (apiResponse.result == true) {
-      emit(AllPolicyFetchedSuccessfully(apiResponse.data));
+      emit(AllPolicyFetchedSuccessfully(apiResponse));
     } else {
-      emit(FailedToFetchData(apiResponse.message ?? "Add Client Failed"));
+      emit(FailedToFetchData("Add Client Failed"));
     }
   }
 }

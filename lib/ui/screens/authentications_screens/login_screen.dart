@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_passwordTextController.text.isEmpty) {
       showSnackBar(context, "Please Enter Password");
     } else {
-      context.read<SignInCubit>().signInWithEmail(password: _passwordTextController.text, email: _emailTextController.text);
+      context.read<SignInCubit>().signInWithEmail(password: _passwordTextController.text, userName: _emailTextController.text);
     }
   }
 
@@ -67,6 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
           if (state is SignInSuccessful) {
             showSnackBar(context, "Sign in Successfully", type: SnackBarType.success);
             signInApiResponse = state.user!;
+            Nav.pushAndRemoveAllRoute(context, const BottomNavigationBarScreen());
           }
         },
         builder: (context, state) {

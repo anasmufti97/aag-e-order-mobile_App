@@ -14,13 +14,13 @@ class ApiConstants {
   static const String login = '$baseUrl/api/values/UserAuthentication';
   static const String signUp = '$baseUrl/auth/register';
   static const String addClientApi = '$baseUrl/client/create';
-  static const String listClientApi = '$baseUrl/client/list';
+  static const String listClientApi = '$baseUrl/api/values/CustomerDetails';
   static const String detailClientApi = '$baseUrl/client/get/';
   static const String addCategoryApi = '$baseUrl/category/create';
   static const String listCategoryApi = '$baseUrl/category/list';
-  static const String allProductsApi = '$baseUrl/product/list';
+  static const String allProductsApi = '$baseUrl/api/values/PolicyProducts';
   static const String productDetailApi = '$baseUrl/product/get/';
-  static const String policyList = '$baseUrl/policy/list';
+  static const String policyList = '$baseUrl/api/values/PolicyDetails';
   static const String addToCart = '$baseUrl/cart/create';
   static const String cartItems = '$baseUrl/cart/get';
   static const String changeQuantity = '$baseUrl/cart/edit';

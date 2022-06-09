@@ -2,6 +2,7 @@ import 'package:aag_e_order_app/models/api_responses/all_client_api_response.dar
 import 'package:aag_e_order_app/resources/repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:get_storage/get_storage.dart';
 
 part 'all_client_state.dart';
 
@@ -12,21 +13,22 @@ class AllClientCubit extends Cubit<AllClientState> {
 
   Future allClient() async {
     emit(LoadingState());
-    final AllClientApiResponse apiResponse = await _repository.allClientRequest();
+    var _formData = {"UserId":GetStorage().read('userName'), "WinUser": "punjab\\dax", "WinPassword": "dax1"};
+    final AllClientApiResponse apiResponse = await _repository.allClientRequest(_formData);
     if (apiResponse.result == true) {
-      emit(AllClientFetchedSuccessfully(apiResponse.data));
+      emit(AllClientFetchedSuccessfully(apiResponse));
     } else {
-      emit(FailedToFetchData(apiResponse.message ?? "Add Client Failed"));
+      emit(const FailedToFetchData( "All Client Failed"));
     }
   }
 
-  Future searchClient({required String name}) async {
-    emit(LoadingState());
-    final AllClientApiResponse apiResponse = await _repository.searchClient(name);
-    if (apiResponse.result == true) {
-      emit(AllClientFetchedSuccessfully(apiResponse.data));
-    } else {
-      emit(FailedToFetchData(apiResponse.message ?? "Add Client Failed"));
-    }
-  }
+  // Future searchClient({required String name}) async {
+  //   emit(LoadingState());
+  //   final AllClientApiResponse apiResponse = await _repository.searchClient(name);
+  //   if (apiResponse.result == true) {
+  //     emit(AllClientFetchedSuccessfully(apiResponse.data));
+  //   } else {
+  //     emit(FailedToFetchData(apiResponse.message ?? "Add Client Failed"));
+  //   }
+  // }
 }

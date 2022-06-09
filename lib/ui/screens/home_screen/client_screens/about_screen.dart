@@ -146,7 +146,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 style: TextStyle(fontSize: 16, color: AppColors.green),
               ),
               onTap: () {
-                Nav.push(context, PolicyBalanceScreen(widget.client.name!, widget.client.address!));
+                // Nav.push(context, PolicyBalanceScreen(widget.client.name!, widget.client.address!));
               },
             ),
           ]),

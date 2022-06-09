@@ -21,8 +21,10 @@ class SignInPostApi {
       print("\n\n\n\n");
       if (response.statusCode == 200) {
         var data = json.decode(response.body.toString());
+        var decodeData = json.decode(data.toString());
         print(data);
-        return SignInApiResponse.fromJson(data);
+        print(decodeData);
+        return SignInApiResponse.fromJson(decodeData);
       } else {
         return SignInApiResponse(status: "fail");
       }

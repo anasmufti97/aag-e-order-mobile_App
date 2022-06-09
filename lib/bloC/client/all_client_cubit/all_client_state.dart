@@ -12,7 +12,7 @@ class AllClientInitial extends AllClientState {}
 class LoadingState extends AllClientState {}
 
 class AllClientFetchedSuccessfully extends AllClientState {
-  final List<Client>? client;
+  final AllClientApiResponse client;
 
   const AllClientFetchedSuccessfully(this.client);
 }

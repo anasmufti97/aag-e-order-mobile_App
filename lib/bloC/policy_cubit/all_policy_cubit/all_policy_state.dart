@@ -12,7 +12,7 @@ class AllPolicyInitial extends AllPolicyState {}
 class LoadingState extends AllPolicyState {}
 
 class AllPolicyFetchedSuccessfully extends AllPolicyState {
-  final List<Policy>? policy;
+  final AllPolicyApiResponse? policy;
 
   const AllPolicyFetchedSuccessfully(this.policy);
 }

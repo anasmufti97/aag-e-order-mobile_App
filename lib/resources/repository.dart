@@ -43,21 +43,21 @@ class Repository {
     return signInPost.signInRequest(data);
   }
 
-  Future<AddClientApiResponse> addClientRequest(Map data) async {
-    return AllClientApi().addClientRequest(data);
+  // Future<AddClientApiResponse> addClientRequest(Map data) async {
+  //   return AllClientApi().addClientRequest(data);
+  // }
+
+  Future<AllClientApiResponse> allClientRequest(Map data) async {
+    return AllClientApi().allClient(data);
   }
 
-  Future<AllClientApiResponse> allClientRequest() async {
-    return AllClientApi().allClient();
-  }
+  // Future<ClientDetailApiResponse> clientDetailRequest(id) async {
+  //   return AllClientApi().detailClientRequest(id);
+  // }
 
-  Future<ClientDetailApiResponse> clientDetailRequest(id) async {
-    return AllClientApi().detailClientRequest(id);
-  }
-
-  Future<AllClientApiResponse> searchClient(name) async {
-    return AllClientApi().searchClient(name);
-  }
+  // Future<AllClientApiResponse> searchClient(name) async {
+  //   return AllClientApi().searchClient(name);
+  // }
 
   Future<AddCategoryApiResponse> addCategoryRequest(Map data) async {
     return AllCategoryApi().addCategoryRequest(data);
@@ -71,16 +71,16 @@ class Repository {
     return AllCategoryApi().searchCategory(name);
   }
 
-  Future<AllProductApiResponse> allProduct(id) async {
-    return ProductApi().allProducts(id);
+  Future<AllProductApiResponse> allProduct(Map data) async {
+    return ProductApi().allProducts(data);
   }
 
-  Future<ProductDetailApiResponse> productDetail(id) async {
-    return ProductApi().productDetailRequest(id);
-  }
+  // Future<ProductDetailApiResponse> productDetail(Map data) async {
+  //   return ProductApi().productDetailRequest(data);
+  // }
 
-  Future<AllPolicyApiResponse> allPolicy() async {
-    return PolicyApi().allPolicy();
+  Future<AllPolicyApiResponse> allPolicy(Map data) async {
+    return PolicyApi().allPolicy(data);
   }
 
   Future<AddToCartApiResponse> addToCart(Map data) async {
@@ -139,7 +139,7 @@ class Repository {
     return DashboardGetApi().getDashboardData(data);
   }
 
-  Future<AllProductApiResponse> searchProduct(id, name) async {
-    return ProductApi().searchProducts(id, name);
-  }
+  // Future<AllProductApiResponse> searchProduct(id, name) async {
+  //   return ProductApi().searchProducts(id, name);
+  // }
 }

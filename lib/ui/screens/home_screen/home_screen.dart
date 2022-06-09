@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:aag_e_order_app/bloC/dashboard_cubit/dashboard_cubit.dart';
 import 'package:aag_e_order_app/models/api_responses/dashboard_api_response.dart';
+import 'package:aag_e_order_app/models/api_responses/sign_in_api_response.dart';
 import 'package:aag_e_order_app/ui/screens/dashboard_screen/side_menu.dart';
 import 'package:aag_e_order_app/ui/screens/home_screen/client_screens/client_screen.dart';
 import 'package:aag_e_order_app/ui/screens/home_screen/delivered_order_screen/delivered_order_screen.dart';
@@ -46,36 +47,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    context.read<DashboardCubit>().dashboardData();
+    // context.read<DashboardCubit>().dashboardData();
     super.initState();
-    getApiResponse();
   }
 
-    Future getApiResponse() async{
-    final Dio dio = Dio();
-    final Response response = await dio.post(
-      "http://202.141.242.82/CustomerWebServices/api/values/UserAuthentication",
-      data: {
-        "userName":"ali",
-        "password":"12345678",
-        "WinUser":"punjab\\dax",
-        "WinPassword":"dax1"
-      },
-    );
-    print(response.data);
-    print(response.data);
-}
 
 
   @override
   Widget build(BuildContext context) {
-    getApiResponse();
     Size size = MediaQuery.of(context).size;
-    String token = GetStorage().read('token');
-    print("User ID => $token");
-    print("User ID => ${GetStorage().read('userId')}");
-    print("User Role => ${GetStorage().read('role')}");
-    print("User Role => ${GetStorage().read('zmId')}");
     return BlocConsumer<DashboardCubit, DashboardState>(
       listener: (context, state) {
         if (state is FailedToFetchData) {
@@ -86,14 +66,12 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       },
       builder: (context, state) {
-        getApiResponse();
         return LoadingScreenAnimation(
           isLoading: state is LoadingState,
           child: SafeArea(
             child: Scaffold(
               appBar: AppBar(
                 backgroundColor: AppColors.green,
-                // leading: const Icon(Icons.menu, color: AppColors.offWhite,),
                 title: const Text(
                   "Ali Akbar Group",
                   style: TextStyle(color: AppColors.offWhite),

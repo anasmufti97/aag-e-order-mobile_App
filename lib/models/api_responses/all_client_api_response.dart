@@ -1,102 +1,84 @@
 class AllClientApiResponse {
   AllClientApiResponse({
-    bool? result,
-    String? message,
-    List<Client>? data,
-  }) {
+      bool? result, 
+      List<Data>? data,}){
     _result = result;
-    _message = message;
     _data = data;
-  }
+}
 
   AllClientApiResponse.fromJson(dynamic json) {
     _result = json['result'];
-    _message = json['message'];
     if (json['data'] != null) {
       _data = [];
       json['data'].forEach((v) {
-        _data?.add(Client.fromJson(v));
+        _data?.add(Data.fromJson(v));
       });
     }
   }
-
   bool? _result;
-  String? _message;
-  List<Client>? _data;
+  List<Data>? _data;
 
   bool? get result => _result;
+  List<Data>? get data => _data;
 
-  String? get message => _message;
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['result'] = _result;
+    if (_data != null) {
+      map['data'] = _data?.map((v) => v.toJson()).toList();
+    }
+    return map;
+  }
 
-  List<Client>? get data => _data;
 }
 
-class Client {
-  Client(
-      {int? id,
-      String? name,
-      String? address,
-      String? email,
-      String? phone,
-      String? region,
-      String? shopChain,
-      String? createdAt,
-      String? updatedAt,
-      dynamic userId}) {
-    _id = id;
+class Data {
+  Data({
+      String? customerAccount, 
+      String? name, 
+      String? address, 
+      String? phone, 
+      String? email, 
+      String? fax,}){
+    _customerAccount = customerAccount;
     _name = name;
     _address = address;
-    _email = email;
     _phone = phone;
-    _region = region;
-    _shopChain = shopChain;
-    _createdAt = createdAt;
-    _updatedAt = updatedAt;
-    _userId = userId;
-    _userId = userId;
-  }
+    _email = email;
+    _fax = fax;
+}
 
-  Client.fromJson(dynamic json) {
-    _id = json['id'];
+  Data.fromJson(dynamic json) {
+    _customerAccount = json['customerAccount'];
     _name = json['name'];
     _address = json['address'];
-    _email = json['email'];
     _phone = json['phone'];
-    _region = json['region'];
-    _shopChain = json['shopChain'];
-    _createdAt = json['createdAt'];
-    _updatedAt = json['updatedAt'];
-    _userId = json['UserId'];
+    _email = json['email'];
+    _fax = json['fax'];
   }
-
-  int? _id;
+  String? _customerAccount;
   String? _name;
   String? _address;
-  String? _email;
   String? _phone;
-  String? _region;
-  String? _shopChain;
-  String? _createdAt;
-  String? _updatedAt;
-  dynamic _userId;
+  String? _email;
+  String? _fax;
 
-  int? get id => _id;
-
+  String? get customerAccount => _customerAccount;
   String? get name => _name;
-
   String? get address => _address;
-
-  String? get email => _email;
-
   String? get phone => _phone;
+  String? get email => _email;
+  String? get fax => _fax;
 
-  String? get region => _region;
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['customerAccount'] = _customerAccount;
+    map['name'] = _name;
+    map['address'] = _address;
+    map['phone'] = _phone;
+    map['email'] = _email;
+    map['fax'] = _fax;
+    return map;
+  }
 
-  String? get shopChain => _shopChain;
-
-  String? get createdAt => _createdAt;
-
-  String? get updatedAt => _updatedAt;
-
-  dynamic get userId => _userId;
 }

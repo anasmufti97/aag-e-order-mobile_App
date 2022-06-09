@@ -14,11 +14,11 @@ class ClientDetailCubit extends Cubit<ClientDetailState> {
     required String id,
   }) async {
     emit(LoadingState());
-    final ClientDetailApiResponse apiResponse = await _repository.clientDetailRequest(id);
-    if (apiResponse.result == true) {
-      emit(AddClientSuccessfully(apiResponse.data!));
-    } else {
-      emit(FailedToFetchData(apiResponse.message ?? "Add Client Failed"));
-    }
+    // final ClientDetailApiResponse apiResponse = await _repository.clientDetailRequest(id);
+    // if (apiResponse.result == true) {
+    //   emit(AddClientSuccessfully(apiResponse.data!));
+    // } else {
+    //   emit(FailedToFetchData(apiResponse.message ?? "Add Client Failed"));
+    // }
   }
 }

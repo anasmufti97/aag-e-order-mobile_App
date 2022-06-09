@@ -1,3 +1,4 @@
+
 class AllCategoryApiResponse {
   AllCategoryApiResponse({
     bool? result,

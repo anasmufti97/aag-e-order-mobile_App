@@ -9,29 +9,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'components/policy_balance_view.dart';
 
 class PolicyBalanceScreen extends StatefulWidget {
-  const PolicyBalanceScreen(this.clientName, this.clientAddress, {Key? key}) : super(key: key);
-  final String clientName;
-  final String clientAddress;
+  const PolicyBalanceScreen(this.customerAccount ,{Key? key}) : super(key: key);
+  final String customerAccount;
 
   @override
   _PolicyBalanceScreenState createState() => _PolicyBalanceScreenState();
 }
 
 class _PolicyBalanceScreenState extends State<PolicyBalanceScreen> {
-  final List<Policy> policy = [];
+
+  AllPolicyApiResponse? allPolicyApiResponse;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AllPolicyCubit()..allPolicy(),
+      create: (context) => AllPolicyCubit()..allPolicy(customerAccount: widget.customerAccount),
       child: BlocConsumer<AllPolicyCubit, AllPolicyState>(
         listener: (context, state) {
           if (state is FailedToFetchData) {
             showSnackBar(context, state.message);
           }
           if (state is AllPolicyFetchedSuccessfully) {
-            policy.clear();
-            policy.addAll(state.policy!);
+            allPolicyApiResponse = state.policy;
           }
         },
         builder: (context, state) {
@@ -47,7 +46,7 @@ class _PolicyBalanceScreenState extends State<PolicyBalanceScreen> {
                     style: TextStyle(color: AppColors.offWhite),
                   ),
                 ),
-                body: PolicyBalanceView(policy, widget.clientName, widget.clientAddress),
+                body:(allPolicyApiResponse != null) ?PolicyBalanceView(allPolicyApiResponse!): SizedBox(),
               ),
             ),
           );

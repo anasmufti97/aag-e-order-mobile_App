@@ -119,19 +119,19 @@ class _AllCategoriesListScreenState extends State<AllCategoriesListScreen> {
                               padding: const EdgeInsets.symmetric(horizontal: 16.0),
                               child: ListTile(
                                 onTap: () {
-                                  if (widget.id != null) {
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => ProductsScreen(category![index].id!, orderId: widget.id),
-                                        )).then((value) => setState(() {}));
-                                  } else {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => ProductsScreen(category![index].id!, orderId: widget.id),
-                                        )).then((value) => setState(() {}));
-                                  }
+                                  // if (widget.id != null) {
+                                  //   Navigator.pushReplacement(
+                                  //       context,
+                                  //       MaterialPageRoute(
+                                  //         builder: (context) => ProductsScreen(category![index].id!, orderId: widget.id),
+                                  //       )).then((value) => setState(() {}));
+                                  // } else {
+                                  //   Navigator.push(
+                                  //       context,
+                                  //       MaterialPageRoute(
+                                  //         builder: (context) => ProductsScreen(category![index].id!, orderId: widget.id),
+                                  //       )).then((value) => setState(() {}));
+                                  // }
                                 },
                                 leading: SizedBox(
                                     height: size.height * 0.04,

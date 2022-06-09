@@ -19,7 +19,7 @@ class ClientScreen extends StatefulWidget {
 }
 
 class _ClientScreenState extends State<ClientScreen> {
-  List<Client>? client = [];
+  AllClientApiResponse? clientApiResponse;
   TextEditingController searchController = TextEditingController();
 
   @override
@@ -36,8 +36,8 @@ class _ClientScreenState extends State<ClientScreen> {
           showSnackBar(context, state.message);
         }
         if (state is AllClientFetchedSuccessfully) {
-          client?.clear();
-          client?.addAll(state.client!);
+          clientApiResponse = state.client;
+
         }
       },
       builder: (context, state) {
@@ -46,26 +46,10 @@ class _ClientScreenState extends State<ClientScreen> {
           child: Scaffold(
             appBar: AppBar(
               backgroundColor: AppColors.green,
+              title: const Text("All Clients"),
               // leading: const Icon(Icons.menu, color: AppColors.offWhite,),
-              actions: [
-                _buildTopAppbar(context),
-                GetStorage().read('role') == "TM"
-                    ? Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: InkWell(
-                          onTap: () {
-                            Nav.push(context, const AddClientScreen());
-                          },
-                          child: const Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          ),
-                        ),
-                      )
-                    : const SizedBox(),
-              ],
             ),
-            body: client!.isNotEmpty ? ClientViewBuilder(client ?? []) :const Center(child: Text('No Data Found')),
+            body: ClientViewBuilder(clientApiResponse),
           ),
         );
       },
@@ -130,7 +114,7 @@ class _ClientScreenState extends State<ClientScreen> {
     if (searchController.text.isEmpty) {
       context.read<AllClientCubit>().allClient();
     } else {
-      await context.read<AllClientCubit>().searchClient(name: searchController.text);
+     // await context.read<AllClientCubit>().searchClient(name: searchController.text);
       print("called...");
     }
   }

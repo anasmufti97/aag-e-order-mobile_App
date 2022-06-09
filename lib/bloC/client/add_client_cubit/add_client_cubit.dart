@@ -21,11 +21,11 @@ class AddClientCubit extends Cubit<AddClientState> {
     emit(LoadingState());
     final data = {"name": userName, "email": email, "region": region.toString(), "phone": phoneNo, "address": address, "shopChain": chain};
     print(data);
-    final AddClientApiResponse apiResponse = await _repository.addClientRequest(data);
-    if (apiResponse.result == true) {
-      emit(AddClientSuccessfully(apiResponse.message ?? "Add Client Successfully"));
-    } else {
-      emit(FailedToAddClient(apiResponse.message ?? "Add Client Failed"));
-    }
+    // final AddClientApiResponse apiResponse = await _repository.addClientRequest(data);
+    // if (apiResponse.result == true) {
+    //   emit(AddClientSuccessfully(apiResponse.message ?? "Add Client Successfully"));
+    // } else {
+    //   emit(FailedToAddClient(apiResponse.message ?? "Add Client Failed"));
+    // }
   }
 }

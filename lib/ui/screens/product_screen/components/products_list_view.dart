@@ -3,13 +3,13 @@ import 'package:aag_e_order_app/utils/navigation_controller/navigator_screen.dar
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../models/api_responses/all_product_api_response.dart';
 import '../product_detail_screen.dart';
 
 class ProductsListView extends StatefulWidget {
-  const ProductsListView(this.product, {Key? key, this.orderId}) : super(key: key);
+  const ProductsListView(this.product, {Key? key}) : super(key: key);
 
-  final List<Product> product;
-  final int? orderId;
+  final AllProductApiResponse product;
 
   @override
   _ProductsListViewState createState() => _ProductsListViewState();
@@ -21,75 +21,46 @@ class _ProductsListViewState extends State<ProductsListView> {
     Size size = MediaQuery.of(context).size;
     return SizedBox(
       height: size.height,
-      child: ListView.separated(
-        itemCount: widget.product.length,
+      child: ListView.builder(
+        itemCount: widget.product.data!.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.product[index].productGenericName ?? '',
-                  style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w400, color: Colors.black),
-                ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     const Text(
-                //       'Price: ',
-                //       style: TextStyle(
-                //         fontSize: 14,
-                //       ),
-                //     ),
-                //     Text(
-                //       '\$${widget.product[index].price ?? ''}',
-                //       style: const TextStyle(
-                //         fontSize: 14,
-                //       ),
-                //     ),
-                //   ],
-                // ),
-              ],
-            ),
-            subtitle: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Quantity: ',
-                  style: TextStyle(
-                    fontSize: 14,
+          return Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Item Name : ${widget.product.data?[index].itemName ?? ''}",
+                    style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black),
                   ),
-                ),
-                Text(
-                  '${widget.product[index].quantity ?? ''}',
-                  style: const TextStyle(
-                    fontSize: 14,
+                  SizedBox(height: 20,),
+                  Text(
+                    "Item Number : ${widget.product.data?[index].itemNumber ?? ''}",
+                    style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Colors.black),
                   ),
-                ),
-              ],
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     const Text(
+                  //       'Price: ',
+                  //       style: TextStyle(
+                  //         fontSize: 14,
+                  //       ),
+                  //     ),
+                  //     Text(
+                  //       '\$${widget.product[index].price ?? ''}',
+                  //       style: const TextStyle(
+                  //         fontSize: 14,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                ],
+              ),
             ),
-            onTap: () {
-              if (widget.orderId != null) {
-                Nav.pushReplace(
-                    context,
-                    ProductDetailScreen(
-                      widget.product[index].id!,
-                      orderId: widget.orderId,
-                    ));
-              } else {
-                Nav.push(
-                    context,
-                    ProductDetailScreen(
-                      widget.product[index].id!,
-                      orderId: widget.orderId,
-                    ));
-              }
-            },
           );
-        },
-        separatorBuilder: (context, index) {
-          return const Divider();
         },
       ),
     );

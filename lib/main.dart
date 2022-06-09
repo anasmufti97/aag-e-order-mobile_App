@@ -64,15 +64,11 @@ class MyApp extends StatelessWidget {
   }
 
   nextScreen() {
-    if (GetStorage().read('token') == null) {
+    if (GetStorage().read('userName') == null) {
       return const SplashScreen();
     } else {
-      if (GetStorage().read('role') == "ZM" || GetStorage().read('role') == "ZA") {
-        return const OrderScreen();
-      }
-      if (GetStorage().read('role') == "TM") {
         return const BottomNavigationBarScreen();
-      }
+
     }
   }
 }

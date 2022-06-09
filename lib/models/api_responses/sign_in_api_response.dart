@@ -1,16 +1,49 @@
 class SignInApiResponse {
   SignInApiResponse({
-      String? status, 
-      String? fullName, 
-      String? password, 
-      String? address, 
-      String? email, 
-      String? phone, 
-      String? region, 
-      String? territory, 
-      String? zone, 
-      String? role,}){
+      String? status,
+      List<Data>? data,}){
     _status = status;
+    _data = data;
+}
+
+  SignInApiResponse.fromJson(dynamic json) {
+    _status = json['status'];
+    if (json['data'] != null) {
+      _data = [];
+      json['data'].forEach((v) {
+        _data?.add(Data.fromJson(v));
+      });
+    }
+  }
+  String? _status;
+  String? userName;
+  List<Data>? _data;
+
+  String? get status => _status;
+  List<Data>? get data => _data;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['status'] = _status;
+    if (_data != null) {
+      map['data'] = _data?.map((v) => v.toJson()).toList();
+    }
+    return map;
+  }
+
+}
+
+class Data {
+  Data({
+      String? fullName,
+      String? password,
+      String? address,
+      String? email,
+      String? phone,
+      String? region,
+      String? territory,
+      String? zone,
+      String? role,}){
     _fullName = fullName;
     _password = password;
     _address = address;
@@ -22,8 +55,7 @@ class SignInApiResponse {
     _role = role;
 }
 
-  SignInApiResponse.fromJson(dynamic json) {
-    _status = json['status'];
+  Data.fromJson(dynamic json) {
     _fullName = json['fullName'];
     _password = json['password'];
     _address = json['address'];
@@ -34,7 +66,6 @@ class SignInApiResponse {
     _zone = json['zone'];
     _role = json['role'];
   }
-  String? _status;
   String? _fullName;
   String? _password;
   String? _address;
@@ -45,7 +76,6 @@ class SignInApiResponse {
   String? _zone;
   String? _role;
 
-  String? get status => _status;
   String? get fullName => _fullName;
   String? get password => _password;
   String? get address => _address;
@@ -58,7 +88,6 @@ class SignInApiResponse {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['status'] = _status;
     map['fullName'] = _fullName;
     map['password'] = _password;
     map['address'] = _address;

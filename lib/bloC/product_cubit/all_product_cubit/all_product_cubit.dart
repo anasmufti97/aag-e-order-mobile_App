@@ -15,35 +15,36 @@ class AllProductCubit extends Cubit<AllProductState> {
 
   Future allProduct({required String id}) async {
     emit(LoadingState());
-    final AllProductApiResponse apiResponse = await _repository.allProduct(id);
+    var _formData = {"PolicyCode":id, "WinUser": "punjab\\dax", "WinPassword": "dax1"};
+    final AllProductApiResponse apiResponse = await _repository.allProduct(_formData);
     if (apiResponse.result == true) {
-      emit(AllProductsFetchedSuccessfully(apiResponse.data));
+      emit(AllProductsFetchedSuccessfully(apiResponse));
     } else {
-      emit(FailedToFetchData(apiResponse.message ?? "Add Client Failed"));
+      emit(const FailedToFetchData( "All Product Product Failed"));
     }
   }
 
-  Future getCartItems() async {
-    emit(LoadingState());
-    final data = {
-      "userId": GetStorage().read('userId'),
-    };
-
-    final CartItemsApiResponse apiResponse = await _repository.cartItems(data);
-    if (apiResponse.result == true) {
-      emit(GetCartItemSuccessfully(apiResponse.data));
-    } else {
-      emit(FailedToFetchData(apiResponse.message ?? "Failed To Fetched Product"));
-    }
-  }
-
-  Future searchProduct({required String id, required String name}) async {
-    emit(LoadingState());
-    final AllProductApiResponse apiResponse = await _repository.searchProduct(id, name);
-    if (apiResponse.result == true) {
-      emit(AllProductsFetchedSuccessfully(apiResponse.data));
-    } else {
-      emit(FailedToFetchData(apiResponse.message ?? "No Products Found"));
-    }
-  }
+  // Future getCartItems() async {
+  //   emit(LoadingState());
+  //   final data = {
+  //     "userId": GetStorage().read('userId'),
+  //   };
+  //
+  //   final CartItemsApiResponse apiResponse = await _repository.cartItems(data);
+  //   if (apiResponse.result == true) {
+  //     emit(GetCartItemSuccessfully(apiResponse.data));
+  //   } else {
+  //     emit(FailedToFetchData(apiResponse.message ?? "Failed To Fetched Product"));
+  //   }
+  // }
+  //
+  // Future searchProduct({required String id, required String name}) async {
+  //   emit(LoadingState());
+  //   final AllProductApiResponse apiResponse = await _repository.searchProduct(id, name);
+  //   if (apiResponse.result == true) {
+  //     emit(AllProductsFetchedSuccessfully(apiResponse.data));
+  //   } else {
+  //     emit(FailedToFetchData(apiResponse.message ?? "No Products Found"));
+  //   }
+  // }
 }
